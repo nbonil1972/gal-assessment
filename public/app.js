@@ -579,7 +579,10 @@ function translateUI() {
   if (logoTextEl) {
     logoTextEl.innerHTML = `${dict.logoName}<span>${dict.logoSub}</span>`;
   }
-  document.getElementById('nav-admin-link').innerText = dict.navAdmin;
+  const navAdminLink = document.getElementById('nav-admin-link');
+  if (navAdminLink) {
+    navAdminLink.innerText = dict.navAdmin;
+  }
 
   // Screen 1: Welcome
   const welcomeBadge = document.querySelector('#screen-welcome .welcome-badge');
