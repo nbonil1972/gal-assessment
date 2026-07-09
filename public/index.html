@@ -117,12 +117,12 @@
                 <input class="form-input" type="email" id="email" required placeholder="john.doe@acme.com">
               </div>
               <div class="form-group">
-                <label class="form-label" for="phone">Phone Number</label>
-                <input class="form-input" type="tel" id="phone" placeholder="+1 (555) 000-0000">
+                <label class="form-label" for="phone">Phone Number<span class="required">*</span></label>
+                <input class="form-input" type="tel" id="phone" required placeholder="+1 (555) 000-0000">
               </div>
               <div class="form-group">
-                <label class="form-label" for="industry">Industry</label>
-                <select class="form-select" id="industry">
+                <label class="form-label" for="industry">Industry<span class="required">*</span></label>
+                <select class="form-select" id="industry" required>
                   <option value="" disabled selected>Select Industry</option>
                   <option value="Technology">Technology & Software</option>
                   <option value="Manufacturing">Manufacturing</option>
@@ -134,8 +134,8 @@
                 </select>
               </div>
               <div class="form-group full-width">
-                <label class="form-label" for="company-size">Company Size</label>
-                <select class="form-select" id="company-size">
+                <label class="form-label" for="company-size">Company Size<span class="required">*</span></label>
+                <select class="form-select" id="company-size" required>
                   <option value="" disabled selected>Select Company Size</option>
                   <option value="1-10">1 - 10 employees</option>
                   <option value="11-50">11 - 50 employees</option>
@@ -258,6 +258,21 @@
                   <div id="growth-velocity-badge" class="maturity-badge growing" style="margin-top: 0.4rem; padding: 0.35rem 0.85rem; font-size: 0.9rem;">High Pot.</div>
                 </div>
 
+                <!-- AI Opportunities Gauge -->
+                <div class="gauge-wrapper" style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                  <div class="gauge-svg-container">
+                    <svg viewBox="0 0 100 100" class="gauge-svg">
+                      <circle cx="50" cy="50" r="42" class="gauge-bg" />
+                      <circle cx="50" cy="50" r="42" class="gauge-fill" id="gauge-fill-ai" style="stroke: #8B5CF6;" />
+                    </svg>
+                    <div class="gauge-value-container">
+                      <span id="gauge-ai-num">0</span>
+                      <span class="gauge-label" id="lbl-gauge-ai-lbl">AI Opt.</span>
+                    </div>
+                  </div>
+                  <div id="ai-opportunities-badge" class="maturity-badge" style="margin-top: 0.4rem; padding: 0.35rem 0.85rem; font-size: 0.9rem; background-color: #F5F3FF; color: #8B5CF6;">High Opt.</div>
+                </div>
+
               </div>
 
               <!-- Indicator Explanations & Color Legend Panel -->
@@ -273,6 +288,12 @@
                 <div style="font-size: 0.725rem; line-height: 1.35; color: var(--text-main); border-top: 1px solid var(--border); padding-top: 0.4rem;">
                   <strong id="lbl-explain-gro-title">Growth Potential:</strong>
                   <span id="lbl-explain-gro-desc">Evaluates your scalability capability based on data decisions and technical automation.</span>
+                </div>
+
+                <!-- AI Opportunities explanation -->
+                <div style="font-size: 0.725rem; line-height: 1.35; color: var(--text-main); border-top: 1px solid var(--border); padding-top: 0.4rem;">
+                  <strong id="lbl-explain-ai-title">AI Opportunities:</strong>
+                  <span id="lbl-explain-ai-desc">Identifies high-impact areas to implement AI solutions and automate process flows.</span>
                 </div>
 
                 <!-- Color legend indicator -->

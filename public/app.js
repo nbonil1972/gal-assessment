@@ -255,6 +255,12 @@ const TRANSLATIONS = {
     growthIndexBadgeLow: 'Low Growth Pot.',
     growthIndexBadgeMed: 'Medium Growth Pot.',
     growthIndexBadgeHigh: 'High Growth Pot.',
+    aiOpportunitiesLabel: 'AI Opt.',
+    aiOpportunitiesBadgeLow: 'Low AI Opt.',
+    aiOpportunitiesBadgeMed: 'Medium AI Opt.',
+    aiOpportunitiesBadgeHigh: 'High AI Opt.',
+    lowCodeTitle: 'Implement low-code technology for business agility',
+    lowCodeDesc: 'There is a need to initially implement low-code technology that brings agility to the business.',
     stepperTitle: 'Growth Trajectory',
     stepperSteps: {
       1: 'Survival',
@@ -267,6 +273,8 @@ const TRANSLATIONS = {
     explainMatDesc: 'Measures operational standardization and efficiency across processes, people, and systems.',
     explainGroTitle: 'Growth Potential:',
     explainGroDesc: 'Evaluates your scalability capability based on data decisions and technical automation.',
+    explainAiTitle: 'AI Opportunities:',
+    explainAiDesc: 'Identifies high-impact areas to implement AI solutions and automate process flows.',
     legendGreen: 'Efficient (70-100)',
     legendYellow: 'Developing (40-69)',
     legendRed: 'Critical (0-39)',
@@ -387,6 +395,12 @@ const TRANSLATIONS = {
     growthIndexBadgeLow: 'Bajo Pot. Crec.',
     growthIndexBadgeMed: 'Medio Pot. Crec.',
     growthIndexBadgeHigh: 'Alto Pot. Crec.',
+    aiOpportunitiesLabel: 'Op. IA',
+    aiOpportunitiesBadgeLow: 'Bajo Pot. IA',
+    aiOpportunitiesBadgeMed: 'Medio Pot. IA',
+    aiOpportunitiesBadgeHigh: 'Alto Pot. IA',
+    lowCodeTitle: 'Implementar tecnología low-code para agilidad',
+    lowCodeDesc: 'Necesidad de implementar inicialmente tecnología low-code que aporte agilidad al negocio.',
     stepperTitle: 'Trayectoria de Crecimiento',
     stepperSteps: {
       1: 'Supervivencia',
@@ -399,6 +413,8 @@ const TRANSLATIONS = {
     explainMatDesc: 'Mide la estandarización y eficiencia operativa de sus procesos, equipo y sistemas.',
     explainGroTitle: 'Potencial de Crecimiento:',
     explainGroDesc: 'Evalúa la capacidad de escalar según sus sistemas analíticos y automatización tecnológica.',
+    explainAiTitle: 'Oportunidades de IA:',
+    explainAiDesc: 'Identifica áreas de alto impacto para implementar soluciones de Inteligencia Artificial.',
     legendGreen: 'Eficiente (70-100)',
     legendYellow: 'En Desarrollo (40-69)',
     legendRed: 'Crítico (0-39)',
@@ -706,6 +722,9 @@ function translateUI() {
   // Growth potential label
   const growthLblEl = document.getElementById('lbl-gauge-growth-lbl');
   if (growthLblEl) growthLblEl.innerText = dict.growthIndexLabel;
+  // AI Opportunities label
+  const aiLblEl = document.getElementById('lbl-gauge-ai-lbl');
+  if (aiLblEl) aiLblEl.innerText = dict.aiOpportunitiesLabel;
 
   // Footnote Note
   const footerNoteEl = document.getElementById('footer-benchmark-note');
@@ -720,6 +739,10 @@ function translateUI() {
   if (explainGroTitleEl) explainGroTitleEl.innerText = dict.explainGroTitle;
   const explainGroDescEl = document.getElementById('lbl-explain-gro-desc');
   if (explainGroDescEl) explainGroDescEl.innerText = dict.explainGroDesc;
+  const explainAiTitleEl = document.getElementById('lbl-explain-ai-title');
+  if (explainAiTitleEl) explainAiTitleEl.innerText = dict.explainAiTitle;
+  const explainAiDescEl = document.getElementById('lbl-explain-ai-desc');
+  if (explainAiDescEl) explainAiDescEl.innerText = dict.explainAiDesc;
 
   // Legend translations
   const legendGreenEl = document.getElementById('lbl-legend-green');
@@ -973,6 +996,65 @@ async function submitAssessment() {
     growthBadge.classList.add(gClass);
   }
 
+  // 3.5. Calculate AI Opportunities Index
+  const aiOpportunities = Math.round(
+    100 - (
+      (categoryScores['Technology'] * 0.3) + 
+      (categoryScores['Information'] * 0.4) + 
+      (categoryScores['Business Processes'] * 0.3)
+    )
+  );
+
+  // Animate AI Opportunities circular gauge
+  const aiScoreNum = document.getElementById('gauge-ai-num');
+  const aiFillCircle = document.getElementById('gauge-fill-ai');
+  const aiBadge = document.getElementById('ai-opportunities-badge');
+  
+  if (aiScoreNum) {
+    let currentVal = 0;
+    const targetVal = aiOpportunities;
+    aiScoreNum.innerText = '0';
+    const interval = setInterval(() => {
+      if (currentVal >= targetVal) {
+        aiScoreNum.innerText = targetVal;
+        clearInterval(interval);
+      } else {
+        currentVal++;
+        aiScoreNum.innerText = currentVal;
+      }
+    }, 12);
+  }
+  
+  if (aiFillCircle) {
+    const radius = 42;
+    const circumference = 2 * Math.PI * radius;
+    const offset = circumference - (aiOpportunities / 100) * circumference;
+    aiFillCircle.style.strokeDashoffset = offset;
+    
+    let strokeColor = '#EF4444'; // Red
+    if (aiOpportunities > 39 && aiOpportunities <= 69) strokeColor = '#F59E0B'; // Orange
+    else if (aiOpportunities > 69) strokeColor = '#22C55E'; // Green
+    aiFillCircle.style.stroke = strokeColor;
+  }
+  
+  if (aiBadge) {
+    let aiBadgeText = '';
+    let aiClass = '';
+    if (aiOpportunities <= 39) {
+      aiBadgeText = dict.aiOpportunitiesBadgeLow;
+      aiClass = 'needs-attention';
+    } else if (aiOpportunities <= 69) {
+      aiBadgeText = dict.aiOpportunitiesBadgeMed;
+      aiClass = 'developing';
+    } else {
+      aiBadgeText = dict.aiOpportunitiesBadgeHigh;
+      aiClass = 'growing';
+    }
+    aiBadge.innerText = aiBadgeText;
+    aiBadge.className = 'maturity-badge';
+    aiBadge.classList.add(aiClass);
+  }
+
   // Update Stepper Timeline for Growth Trajectory
   const stepItems = [
     document.getElementById('step-1'),
@@ -1103,36 +1185,97 @@ async function submitAssessment() {
     trafficContainer.appendChild(item);
   });
 
+  // Check if any of the target questions got an answer <= 4 (not Strongly Agree)
+  const lowCodeQuestions = [
+    "Projects usually finish on time.",
+    "Manual work is kept to a minimum.",
+    "Departments work well together.",
+    "Performance is monitored.",
+    "Our tools make daily work easier.",
+    "Information is easy to access.",
+    "We avoid entering the same information multiple times.",
+    "Technology helps improve productivity.",
+    "Digital tools support our business goals.",
+    "Reports are available when needed.",
+    "Business indicators are monitored.",
+    "Customers receive timely responses."
+  ];
+
+  let triggerLowCodeRec = false;
+  lowCodeQuestions.forEach(qText => {
+    const qIdx = QUESTIONS.findIndex(q => q.text === qText);
+    if (qIdx !== -1 && answers[qIdx] !== null && answers[qIdx] <= 4) {
+      triggerLowCodeRec = true;
+    }
+  });
+
   // Sort categories by score ascending to trigger dynamic recommendations
   const sortedCategories = categories.map(cat => ({
     category: cat,
     score: categoryScores[cat]
   })).sort((a, b) => a.score - b.score);
 
-  const priorityLevels = ['high', 'medium', 'low'];
-  const priorityLabels = [dict.recPriorities.high, dict.recPriorities.medium, dict.recPriorities.low];
   const recsContainer = document.getElementById('recs-list-container');
   recsContainer.innerHTML = '';
 
-  for (let i = 0; i < 3; i++) {
-    const catItem = sortedCategories[i];
-    const recData = dict.recs[catItem.category];
-    const levelName = priorityLevels[i];
-    const labelName = priorityLabels[i];
+  const finalRecs = [];
 
+  // If low-code recommendation is triggered, add it at the top (High Priority)
+  if (triggerLowCodeRec) {
+    finalRecs.push({
+      priority: 'high',
+      priorityLabel: dict.recPriorities.high,
+      title: dict.lowCodeTitle,
+      desc: dict.lowCodeDesc,
+      focusArea: currentLang === 'en' ? "Technology & Processes" : "Tecnología y Procesos"
+    });
+  }
+
+  // Populate category-based recommendations
+  sortedCategories.forEach((catItem, idx) => {
+    const recData = dict.recs[catItem.category];
     const catLabel = currentLang === 'es' 
       ? QUESTIONS.find(q => q.category === catItem.category).category_es 
       : catItem.category;
+    
+    // Assign priorities based on list position
+    let levelName = 'low';
+    let labelName = dict.recPriorities.low;
+    
+    const currentLength = finalRecs.length;
+    if (currentLength === 0) {
+      levelName = 'high';
+      labelName = dict.recPriorities.high;
+    } else if (currentLength === 1) {
+      levelName = 'medium';
+      labelName = dict.recPriorities.medium;
+    } else if (currentLength === 2) {
+      levelName = 'low';
+      labelName = dict.recPriorities.low;
+    }
+    
+    finalRecs.push({
+      priority: levelName,
+      priorityLabel: labelName,
+      title: recData.title,
+      desc: recData.desc,
+      focusArea: `${catLabel} (Score: ${catItem.score}/100)`
+    });
+  });
 
+  // Show top 4 if low-code was triggered, otherwise 3
+  const maxRecsToShow = triggerLowCodeRec ? 4 : 3;
+  for (let i = 0; i < Math.min(maxRecsToShow, finalRecs.length); i++) {
+    const rec = finalRecs[i];
     const recEl = document.createElement('div');
-    recEl.className = `rec-item ${levelName}`;
+    recEl.className = `rec-item ${rec.priority}`;
     recEl.innerHTML = `
-      <span class="rec-badge ${levelName}">${labelName}</span>
+      <span class="rec-badge ${rec.priority}">${rec.priorityLabel}</span>
       <div class="rec-content">
-        <span class="rec-title">${recData.title}</span>
-        <span class="rec-desc">${recData.desc}</span>
+        <span class="rec-title">${rec.title}</span>
+        <span class="rec-desc">${rec.desc}</span>
         <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; margin-top: 0.25rem;">
-          ${currentLang === 'en' ? 'Focus Area' : 'Área de Enfoque'}: ${catLabel} (Score: ${catItem.score}/100)
+          ${currentLang === 'en' ? 'Focus Area' : 'Área de Enfoque'}: ${rec.focusArea}
         </span>
       </div>
     `;
@@ -1361,27 +1504,31 @@ function downloadPDFReport() {
   const sizeText = contactData.companySize ? dict.sizes[contactData.companySize] : '';
   doc.text(industryText || '', 132, 40);
   doc.text(sizeText || '', 132, 47);
-
-  // OVERALL SCORE INDEXES (Maturity & Growth side-by-side)
+  // OVERALL SCORE INDEXES (Maturity, Growth & AI Opportunities)
   const score = parseInt(scoreNum.innerText, 10);
   const maturity = maturityBadge.innerText;
   const growthValText = document.getElementById('gauge-growth-num') ? document.getElementById('gauge-growth-num').innerText : '0';
   const growthBadgeText = document.getElementById('growth-velocity-badge') ? document.getElementById('growth-velocity-badge').innerText : '';
+  const aiValText = document.getElementById('gauge-ai-num') ? document.getElementById('gauge-ai-num').innerText : '0';
+  const aiBadgeText = document.getElementById('ai-opportunities-badge') ? document.getElementById('ai-opportunities-badge').innerText : '';
 
   doc.setFillColor(248, 250, 252);
-  doc.rect(15, 56, 88, 16, 'F');
-  doc.rect(15, 56, 88, 16, 'S');
+  doc.rect(15, 56, 58, 16, 'F');
+  doc.rect(15, 56, 58, 16, 'S');
 
-  doc.rect(107, 56, 88, 16, 'F');
-  doc.rect(107, 56, 88, 16, 'S');
+  doc.rect(76, 56, 58, 16, 'F');
+  doc.rect(76, 56, 58, 16, 'S');
+
+  doc.rect(137, 56, 58, 16, 'F');
+  doc.rect(137, 56, 58, 16, 'S');
 
   // Maturity Score Index Info
-  doc.setFontSize(8);
+  doc.setFontSize(7.5);
   doc.setTextColor(darkText[0], darkText[1], darkText[2]);
   doc.setFont('Helvetica', 'bold');
   doc.text(currentLang === 'en' ? 'Maturity Index' : 'Índice de Madurez', 18, 61);
   
-  doc.setFontSize(10);
+  doc.setFontSize(9);
   let matColor = [37, 99, 235]; // primary blue
   if (score <= 39) matColor = [239, 68, 68]; // red
   else if (score <= 69) matColor = [245, 158, 11]; // orange
@@ -1390,19 +1537,34 @@ function downloadPDFReport() {
   doc.text(`${score}/100 - ${maturity}`, 18, 68);
 
   // Growth Potential Index Info
-  doc.setFontSize(8);
+  doc.setFontSize(7.5);
   doc.setTextColor(darkText[0], darkText[1], darkText[2]);
   doc.setFont('Helvetica', 'bold');
-  doc.text(currentLang === 'en' ? 'Growth Potential' : 'Potencial de Crecimiento', 110, 61);
+  doc.text(currentLang === 'en' ? 'Growth Potential' : 'Potencial Crecimiento', 79, 61);
 
-  doc.setFontSize(10);
+  doc.setFontSize(9);
   const growthVal = parseInt(growthValText, 10);
   let groColor = [37, 99, 235];
   if (growthVal <= 39) groColor = [239, 68, 68];
   else if (growthVal <= 69) groColor = [245, 158, 11];
   else groColor = [34, 197, 94];
   doc.setTextColor(groColor[0], groColor[1], groColor[2]);
-  doc.text(`${growthValText}/100 - ${growthBadgeText}`, 110, 68);
+  doc.text(`${growthValText}/100 - ${growthBadgeText}`, 79, 68);
+
+  // AI Opportunities Index Info
+  doc.setFontSize(7.5);
+  doc.setTextColor(darkText[0], darkText[1], darkText[2]);
+  doc.setFont('Helvetica', 'bold');
+  doc.text(currentLang === 'en' ? 'AI Opportunities' : 'Oportunidades de IA', 140, 61);
+
+  doc.setFontSize(9);
+  const aiVal = parseInt(aiValText, 10);
+  let aiColor = [37, 99, 235];
+  if (aiVal <= 39) aiColor = [239, 68, 68];
+  else if (aiVal <= 69) aiColor = [245, 158, 11];
+  else aiColor = [34, 197, 94];
+  doc.setTextColor(aiColor[0], aiColor[1], aiColor[2]);
+  doc.text(`${aiValText}/100 - ${aiBadgeText}`, 140, 68);
 
   // 3. VISUAL CHARTS & CATEGORY DESEMPEÑO (Side-by-side)
   // Radar Chart Image on left
