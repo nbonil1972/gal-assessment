@@ -598,7 +598,7 @@ main {
   justify-content: center;
 }
 
-#gauge-score-num {
+#gauge-score-num, #gauge-growth-num, #gauge-ai-num {
   font-size: 2.75rem;
   font-weight: 800;
   color: var(--text-main);
