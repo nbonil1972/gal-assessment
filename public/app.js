@@ -251,6 +251,7 @@ const TRANSLATIONS = {
     
     consentTitle: 'Confidentiality & Data Consent:',
     consentDesc: 'I authorize the processing of my data to receive this maturity report under strict privacy and confidentiality standards.',
+    headerTitle: 'ASSESSMENT',
     growthIndexLabel: 'Growth Pot.',
     growthIndexBadgeLow: 'Low Growth Pot.',
     growthIndexBadgeMed: 'Medium Growth Pot.',
@@ -391,6 +392,7 @@ const TRANSLATIONS = {
     
     consentTitle: 'Autorización de Datos y Confidencialidad:',
     consentDesc: 'Autorizo el tratamiento de mis datos para recibir este reporte de madurez operativa bajo estrictos estándares de privacidad y confidencialidad.',
+    headerTitle: 'EVALUACIÓN',
     growthIndexLabel: 'Pot. Crecimiento',
     growthIndexBadgeLow: 'Bajo Pot. Crec.',
     growthIndexBadgeMed: 'Medio Pot. Crec.',
@@ -590,7 +592,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function translateUI() {
   const dict = TRANSLATIONS[currentLang];
   
-  // Header Logo & Nav Link
+  // Header Logo, Nav Link & Middle Title
   const logoTextEl = document.querySelector('.logo-text');
   if (logoTextEl) {
     logoTextEl.innerHTML = `${dict.logoName}<span>${dict.logoSub}</span>`;
@@ -598,6 +600,10 @@ function translateUI() {
   const navAdminLink = document.getElementById('nav-admin-link');
   if (navAdminLink) {
     navAdminLink.innerText = dict.navAdmin;
+  }
+  const headerTitleEl = document.getElementById('header-middle-title');
+  if (headerTitleEl) {
+    headerTitleEl.innerText = dict.headerTitle;
   }
 
   // Screen 1: Welcome
