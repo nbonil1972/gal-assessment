@@ -251,7 +251,7 @@ const TRANSLATIONS = {
     
     consentTitle: 'Confidentiality & Data Consent:',
     consentDesc: 'I authorize the processing of my data to receive this maturity report under strict privacy and confidentiality standards.',
-    headerTitle: 'ASSESSMENT',
+    headerTitle: '',
     growthIndexLabel: 'Growth Pot.',
     growthIndexBadgeLow: 'Low Growth Pot.',
     growthIndexBadgeMed: 'Medium Growth Pot.',
@@ -392,7 +392,7 @@ const TRANSLATIONS = {
     
     consentTitle: 'Autorización de Datos y Confidencialidad:',
     consentDesc: 'Autorizo el tratamiento de mis datos para recibir este reporte de madurez operativa bajo estrictos estándares de privacidad y confidencialidad.',
-    headerTitle: 'EVALUACIÓN',
+    headerTitle: 'Evaluación del Crecimiento del negocio',
     growthIndexLabel: 'Pot. Crecimiento',
     growthIndexBadgeLow: 'Bajo Pot. Crec.',
     growthIndexBadgeMed: 'Medio Pot. Crec.',
