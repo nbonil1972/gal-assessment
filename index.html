@@ -15,11 +15,15 @@
 
   <!-- Header -->
   <header>
-    <a href="#" class="logo-container" id="header-logo">
-      <div class="logo-icon">B</div>
-      <div class="logo-text">Growth<span>Assessment</span></div>
-    </a>
-    <div style="display: flex; align-items: center; gap: 1.25rem;">
+    <div style="flex: 1; display: flex; justify-content: flex-start; align-items: center;">
+      <a href="#" class="logo-container" id="header-logo">
+        <img src="russell_bedford.png" alt="Russell Bedford" style="height: 80px; width: auto; max-height: 80px; object-fit: contain;">
+      </a>
+    </div>
+    <div style="flex: 2; display: flex; justify-content: center; align-items: center;">
+      <span id="header-middle-title" style="font-family: var(--font-sans); font-size: 1.2rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.02em; text-align: center;"></span>
+    </div>
+    <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center;">
       <div class="lang-switch" id="lang-switch-container">
         <button class="lang-btn active" data-lang="en">EN</button>
         <button class="lang-btn" data-lang="es">ES</button>
@@ -237,7 +241,6 @@
                     </svg>
                     <div class="gauge-value-container">
                       <span id="gauge-score-num">0</span>
-                      <span class="gauge-label">Maturity</span>
                     </div>
                   </div>
                   <div id="result-maturity-badge" class="maturity-badge" style="margin-top: 0.4rem; padding: 0.35rem 0.85rem; font-size: 0.9rem;">Developing</div>
@@ -252,7 +255,6 @@
                     </svg>
                     <div class="gauge-value-container">
                       <span id="gauge-growth-num">0</span>
-                      <span class="gauge-label" id="lbl-gauge-growth-lbl">Growth Pot.</span>
                     </div>
                   </div>
                   <div id="growth-velocity-badge" class="maturity-badge growing" style="margin-top: 0.4rem; padding: 0.35rem 0.85rem; font-size: 0.9rem;">High Pot.</div>
@@ -267,7 +269,6 @@
                     </svg>
                     <div class="gauge-value-container">
                       <span id="gauge-ai-num">0</span>
-                      <span class="gauge-label" id="lbl-gauge-ai-lbl">AI Opt.</span>
                     </div>
                   </div>
                   <div id="ai-opportunities-badge" class="maturity-badge" style="margin-top: 0.4rem; padding: 0.35rem 0.85rem; font-size: 0.9rem; background-color: #F5F3FF; color: #8B5CF6;">High Opt.</div>
@@ -339,7 +340,7 @@
               </div>
 
               <!-- Trajectory stage explanation box -->
-              <div id="trajectory-explanation-box" style="margin-top: 0.75rem; width: 100%; background: #F8FAFC; border: 1px solid var(--border); padding: 0.65rem 0.85rem; border-radius: 0.5rem; text-align: left; font-size: 0.725rem; line-height: 1.35; box-sizing: border-box;">
+              <div id="trajectory-explanation-box" style="margin-top: 0.75rem; width: 100%; background: var(--bg-input); border: 1px solid var(--border); padding: 0.65rem 0.85rem; border-radius: 0.5rem; text-align: left; font-size: 0.725rem; line-height: 1.35; box-sizing: border-box;">
                 <strong id="lbl-trajectory-stage-title">Your Trajectory Stage:</strong>
                 <p id="lbl-trajectory-stage-desc" style="margin: 0.25rem 0 0 0; color: var(--text-muted);"></p>
               </div>
