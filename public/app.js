@@ -1455,21 +1455,20 @@ function downloadPDFReport() {
   const imgLogoRb = document.getElementById('img-logo-rb');
   const imgLogoGbs = document.getElementById('img-logo-gbs');
 
-  // PAGE TITLE HEADER
-  // Draw Russell Bedford Logo (balanced and aligned)
+  // Draw Impulso Global Logo (balanced and aligned)
   if (imgLogoRb) {
-    doc.addImage(imgLogoRb, 'PNG', 15, 7, 20, 20);
+    doc.addImage(imgLogoRb, 'JPEG', 15, 9, 28, 8);
   }
   
   doc.setTextColor(darkText[0], darkText[1], darkText[2]);
   doc.setFontSize(15);
   doc.setFont('Helvetica', 'bold');
-  doc.text(dict.pdfTitle, 40, 15.5);
+  doc.text(dict.pdfTitle, 48, 15.5);
   
   doc.setFontSize(9.5);
   doc.setFont('Helvetica', 'normal');
   doc.setTextColor(MutedText[0], MutedText[1], MutedText[2]);
-  doc.text(dict.pdfSub, 40, 21.5);
+  doc.text(dict.pdfSub, 48, 21.5);
   
   const formattedDate = new Date().toLocaleDateString(currentLang === 'en' ? 'en-US' : 'es-ES', {
     year: 'numeric', month: 'long', day: 'numeric'
