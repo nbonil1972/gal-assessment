@@ -492,6 +492,26 @@ const btnRestart = document.getElementById('btn-restart-assessment');
 
 // Initialize events
 document.addEventListener('DOMContentLoaded', () => {
+  // Draw Impulso Global Logo on preloader canvas
+  const canvas = document.getElementById('img-logo-rb');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, 280, 80);
+    
+    ctx.font = 'bold 36px sans-serif';
+    ctx.fillStyle = '#0F172A'; 
+    ctx.fillText('IMPULSO', 10, 42);
+    
+    const widthImpulso = ctx.measureText('IMPULSO').width;
+    ctx.fillStyle = '#00bfb3'; 
+    ctx.fillText(' GLOBAL', 10 + widthImpulso, 42);
+    
+    ctx.font = 'bold 18px sans-serif';
+    ctx.fillStyle = '#939598'; 
+    ctx.fillText('DE RESULTADOS', 12, 68);
+  }
+
   // Language Switch Events
   const langContainer = document.getElementById('lang-switch-container');
   if (langContainer) {
