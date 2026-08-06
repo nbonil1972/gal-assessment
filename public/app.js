@@ -1358,12 +1358,12 @@ function renderRadarChart(labels, dataValues, benchmarkValues) {
         {
           label: currentLang === 'en' ? 'Your Score' : 'Tu Puntaje',
           data: dataValues,
-          backgroundColor: 'rgba(37, 99, 235, 0.15)',
-          borderColor: '#2563EB',
-          pointBackgroundColor: '#2563EB',
+          backgroundColor: 'rgba(0, 191, 179, 0.15)',
+          borderColor: '#00bfb3',
+          pointBackgroundColor: '#00bfb3',
           pointBorderColor: '#fff',
           pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: '#2563EB',
+          pointHoverBorderColor: '#00bfb3',
           borderWidth: 2
         },
         {
@@ -1447,7 +1447,7 @@ function downloadPDFReport() {
   const dict = TRANSLATIONS[currentLang];
   
   // Core colors
-  const primaryColor = [37, 99, 235]; // #2563EB
+  const primaryColor = [0, 191, 179]; // #00bfb3 (Teal/Verde Mar)
   const darkText = [15, 23, 42]; // #0F172A
   const MutedText = [100, 116, 139]; // #64748B
   
